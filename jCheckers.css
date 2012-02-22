@@ -8,11 +8,20 @@ body {
 #board td {
 	width: 40px;
 	height: 40px;
-	background-color: black;
-	color: black;
+	background-color: #555;
+	color: #555;
+	text-align: center;
 }
 
 #board td.light {
-	background-color: white;
-	color: white;
+	background-color: #ddd;
+	color: #ddd;
+}
+
+.piece_red {
+	color: red;
+}
+
+.piece_black {
+	color: black;
 }

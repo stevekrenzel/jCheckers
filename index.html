@@ -10,7 +10,11 @@
 				for (i=0; i<board.rows.length; i++) {
 					boardElement += "<tr>";
 					for (ii=0; ii<board.rows[i].length; ii++) {
-						boardElement += "<td class=\"" + board.rows[i][ii].getColor() + "\">&nbsp;</td>";
+						boardElement += "<td class=\"" + board.rows[i][ii].getColor() + "\">";
+						if (typeof board.rows[i][ii].getPiece() != "undefined") {
+							boardElement += "<span class=\"piece_" + board.rows[i][ii].getPiece().getPlayer().getColor() + "\">&#x25C9;</span>";
+						}
+						boardElement += "</td>";
 					}
 					boardElement += "</tr>";
 				}
