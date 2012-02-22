@@ -1,0 +1,16 @@
+body {
+	background: green;
+}
+
+#board {
+}
+
+#board td {
+	background-color: black;
+	color: black;
+}
+
+#board td.light {
+	background-color: white;
+	color: white;
+}
