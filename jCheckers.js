@@ -1,40 +1,10 @@
-var square = function (spec) {
-	var that = {};
-	var piece;
-
-	that.getColor = function ( ) {
-		return spec.color;
-	}
-
-	that.setPiece = function (newPiece) {
-		piece = newPiece;
-	}
-
-	that.getPiece = function ( ) {
-		return piece || undefined;
-	}
-
-	return that;
-}
-
-var piece = function (spec) {
-	var that = {};
-
-	that.getPlayer = function ( ) {
-		return spec.player;
-	}
-
-	return that;
-}
-
-var player = function (spec) {
-	var that = {};
-
-	that.getColor = function ( ) {
-		return spec.color;
-	}
-
-	return that;
+// This I cribbed from http://javascript.crockford.com/prototypal.html, which is apparently how things work in this world.
+if (typeof Object.create !== 'function') {
+	Object.create = function (o) {
+		function F() {}
+		F.prototype = o;
+		return new F();
+	};
 }
 
 function reverseColor(thisColor) {
@@ -47,32 +17,34 @@ function reverseColor(thisColor) {
 
 // Initialize the board.
 var board = { };
-board.rows = [ ];
 var thisColor = 'light';
-for (i=0; i<8; i++) {
+board.rows = [ ];
+_.times(8, function(i) {
 	thisColor = reverseColor(thisColor);
 	board.rows[i] = [ ];
-	for (ii=0; ii<8; ii++) {
+	_.times(8, function(ii) {
 		thisColor = reverseColor(thisColor);
-		board.rows[i][ii] = square({color: thisColor});
-	}
-}
+		board.rows[i][ii] = Object.create({});
+		board.rows[i][ii].color = thisColor;
+	});
+});
 
 // Initialize the players.
-var players = [ player({color: 'black'}), player({color: 'red'}) ];
+var players = [ Object.create({}), Object.create({}) ];
+players[0].color = 'black';
+players[1].color = 'red';
 
 // Initialize the pieces. (I'll clean this up later.)
-for (i=0; i<3; i++) {
-	for (ii=0; ii<board.rows[i].length; ii++) {
-		if (board.rows[i][ii].getColor() == 'dark') {
-			board.rows[i][ii].setPiece( piece({player: players[0]}) );
+_.times(3, function(i) {
+	_.times(board.rows[i].length, function(ii) {
+		if (board.rows[i][ii].color == 'dark') {
+			board.rows[i][ii].piece = Object.create({});
+			board.rows[i][ii].piece.player = players[0];
 		}
-	}
-}
-for (i = (board.rows.length - 1); i > (board.rows.length - 4); i--) {
-	for (ii=0; ii<board.rows[i].length; ii++) {
-		if (board.rows[i][ii].getColor() == 'dark') {
-			board.rows[i][ii].setPiece( piece({player: players[1]}) );
+		var redmodifier = 5;
+		if (board.rows[i+redmodifier][ii].color == 'dark') {
+			board.rows[i+redmodifier][ii].piece = Object.create({});
+			board.rows[i+redmodifier][ii].piece.player = players[1];
 		}
-	}
-}
+	});
+});
