@@ -34,6 +34,23 @@ _.times(8, function(i) {
 	});
 });
 
+board.draw = function() {
+	var boardElement = "<table id=\"board\" cellspacing=\"0\" cellpadding=\"0\">";
+	_.each(board.rows, function(row) {
+		boardElement += "<tr>";
+		_.each(row, function(rowSquare) {
+			boardElement += "<td class=\"" + rowSquare.color + "\">";
+			if (typeof rowSquare.piece !== "undefined") {
+				boardElement += "<span class=\"piece_" + rowSquare.piece.player.color + "\">&#x25C9;</span>";
+			}
+			boardElement += "</td>";
+		});
+		boardElement += "</tr>";
+	});
+	boardElement += "</table>";
+	return boardElement;
+}
+
 // Initialize the pieces. (I'll clean this up later.)
 _.times(3, function(i) {
 	_.times(board.rows[i].length, function(ii) {
@@ -52,5 +69,5 @@ _.times(3, function(i) {
 // Initialize the scoreboard.
 var scoreboard = { };
 scoreboard.draw = function() {
-
+	return "";
 }

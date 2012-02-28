@@ -6,22 +6,8 @@
 		<link rel="stylesheet" href="jCheckers.css"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				// I am pretty unhappy to be working in raw HTML like this.
-				var boardElement = "<table id=\"board\" cellspacing=\"0\" cellpadding=\"0\">";
-				_.each(board.rows, function(row) {
-					boardElement += "<tr>";
-					_.each(row, function(rowSquare) {
-						boardElement += "<td class=\"" + rowSquare.color + "\">";
-						if (typeof rowSquare.piece != "undefined") {
-							boardElement += "<span class=\"piece_" + rowSquare.piece.player.color + "\">&#x25C9;</span>";
-						}
-						boardElement += "</td>";
-					});
-					boardElement += "</tr>";
-				});
-				boardElement += "</table>"
-				$('body').append(boardElement);
-				//$('body').append(scoreboard.draw());
+				$('#board').replaceWith(board.draw());
+				$('#scoreboard').replaceWith(scoreboard.draw());
 			});
 		</script>
 
@@ -30,6 +16,15 @@
 
 	<body>
 		<h1>jCheckers</h1>
+
+		<table id="board" cellspacing="0" cellpadding="0">
+			<tr><td>&nbsp;</td></tr>
+		</table>
+
+		<table id="scoreboard" cellspacing="0" cellpadding="0">
+			<tr><td>&nbsp;</td></tr>
+		</table>
+
 	</body>
 
 </html>
