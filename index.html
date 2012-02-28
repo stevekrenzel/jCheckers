@@ -8,19 +8,20 @@
 			$(document).ready(function(){
 				// I am pretty unhappy to be working in raw HTML like this.
 				var boardElement = "<table id=\"board\" cellspacing=\"0\" cellpadding=\"0\">";
-				for (i=0; i<board.rows.length; i++) {
+				_.each(board.rows, function(row) {
 					boardElement += "<tr>";
-					for (ii=0; ii<board.rows[i].length; ii++) {
-						boardElement += "<td class=\"" + board.rows[i][ii].color + "\">";
-						if (typeof board.rows[i][ii].piece != "undefined") {
-							boardElement += "<span class=\"piece_" + board.rows[i][ii].piece.player.color + "\">&#x25C9;</span>";
+					_.each(row, function(rowSquare) {
+						boardElement += "<td class=\"" + rowSquare.color + "\">";
+						if (typeof rowSquare.piece != "undefined") {
+							boardElement += "<span class=\"piece_" + rowSquare.piece.player.color + "\">&#x25C9;</span>";
 						}
 						boardElement += "</td>";
-					}
+					});
 					boardElement += "</tr>";
-				}
+				});
 				boardElement += "</table>"
 				$('body').append(boardElement);
+				//$('body').append(scoreboard.draw());
 			});
 		</script>
 
@@ -28,7 +29,7 @@
 	</head>
 
 	<body>
-		<p>HOLY SHIT CHECKERS</p>
+		<h1>jCheckers</h1>
 	</body>
 
 </html>

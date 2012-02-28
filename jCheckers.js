@@ -15,6 +15,11 @@ function reverseColor(thisColor) {
 	}
 }
 
+// Initialize the players.
+var players = [ Object.create({}), Object.create({}) ];
+players[0].color = 'black';
+players[1].color = 'red';
+
 // Initialize the board.
 var board = { };
 var thisColor = 'light';
@@ -28,11 +33,6 @@ _.times(8, function(i) {
 		board.rows[i][ii].color = thisColor;
 	});
 });
-
-// Initialize the players.
-var players = [ Object.create({}), Object.create({}) ];
-players[0].color = 'black';
-players[1].color = 'red';
 
 // Initialize the pieces. (I'll clean this up later.)
 _.times(3, function(i) {
@@ -48,3 +48,9 @@ _.times(3, function(i) {
 		}
 	});
 });
+
+// Initialize the scoreboard.
+var scoreboard = { };
+scoreboard.draw = function() {
+
+}
