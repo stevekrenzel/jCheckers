@@ -8,6 +8,7 @@
 			$(document).ready(function(){
 				$('#board').replaceWith(board.draw());
 				$('#scoreboard').replaceWith(scoreboard.draw());
+				$('#notice').replaceWith(currentTurn.draw());
 			});
 		</script>
 
@@ -16,6 +17,10 @@
 
 	<body>
 		<h1>jCheckers</h1>
+
+		<div id="notice">
+			&nbsp;
+		</div>
 
 		<table id="board" cellspacing="0" cellpadding="0">
 			<tr><td>&nbsp;</td></tr>

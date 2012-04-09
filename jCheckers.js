@@ -1,5 +1,4 @@
-// This I cribbed from http://javascript.crockford.com/prototypal.html, which is apparently how things work in this world.
-// And yeah, it seems dumb to be calling Object.create({}) all over the place. I'm assuming those'll end up being genuine classes.
+// This I pasted from http://javascript.crockford.com/prototypal.html, which is apparently how things work in this world.
 if (typeof Object.create !== 'function') {
 	Object.create = function (o) {
 		function F() {}
@@ -28,6 +27,12 @@ var player = {
 var players = [ Object.create(player), Object.create(player) ];
 players[0].color = 'black';
 players[1].color = 'red';
+
+var turn = {
+	draw: function () {
+		return "<div id=\"notice\">" + this.player.color + " player's move.</div>";
+	}
+}
 
 // Initialize the board.
 var board = { };
@@ -98,3 +103,6 @@ scoreboard.draw = function() {
 
 	return scoreboardElement;
 }
+
+currentTurn = Object.create(turn);
+currentTurn.player = players[0];

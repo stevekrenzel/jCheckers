@@ -7,6 +7,7 @@ body {
 }
 
 #board {
+	margin-top: 30px;
 }
 
 #board td {
@@ -45,4 +46,12 @@ body {
 	background-color: #ddd;
 	width: 158px;
 	text-align: center;
+}
+
+#notice {
+	width: 314px;
+	padding: 2px;
+	border: 1px #222 solid;
+	background-color: #ddd;
+	color: #222;
 }
