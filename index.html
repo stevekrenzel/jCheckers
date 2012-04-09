@@ -5,8 +5,9 @@
 		<script type="text/javascript" src="jCheckers.js"></script>
 		<link rel="stylesheet" href="jCheckers.css"></script>
 		<script type="text/javascript">
-			$(document).ready(function(){
+			$(document).ready(function() {
 				$('#board').replaceWith(board.draw());
+				board.initClickEvents();
 				$('#scoreboard').replaceWith(scoreboard.draw());
 				$('#notice').replaceWith(currentTurn.draw());
 			});
@@ -16,7 +17,7 @@
 	</head>
 
 	<body>
-		<h1>jCheckers</h1>
+		<h1 id="clicktest">jCheckers</h1>
 
 		<div id="notice">
 			&nbsp;

@@ -23,6 +23,10 @@ body {
 	color: #ddd;
 }
 
+#board td.selected {
+	background-color: blue;
+}
+
 .red {
 	color: red;
 }
