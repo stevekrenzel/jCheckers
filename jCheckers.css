@@ -1,5 +1,5 @@
 body {
-	background: #252;
+	background: #242;
 	color: #ddd;
 	font-family: helvetica, arial, sans-serif;
 	padding-top: 20px;
@@ -16,6 +16,7 @@ body {
 	background-color: #555;
 	color: #555;
 	text-align: center;
+	font-size: 1.5em;
 }
 
 #board td.light {
@@ -28,7 +29,7 @@ body {
 }
 
 .red {
-	color: red;
+	color: #d00;
 }
 
 .black {
