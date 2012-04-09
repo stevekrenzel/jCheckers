@@ -50,7 +50,7 @@ var square = {
 
 var turn = {
 	draw: function () {
-		$('#notice').replaceWith("<div id=\"notice\">" + this.player.color + " player's move.</div>");
+		$('#notice').replaceWith("<div id=\"notice\" class=\"" + this.player.color + "\">" + this.player.color + " player's move.</div>");
 		board.draw();
 		scoreboard.draw();
 	},
@@ -63,6 +63,20 @@ var turn = {
 		this.selectedSquare = newSquare;
 		$("#" + newSquare.htmlId()).removeClass('dark');
 		$("#" + newSquare.htmlId()).addClass('selected');
+	},
+
+	movePieceTo: function (newSquare) {
+		newSquare.piece = this.selectedSquare.piece;
+		this.selectedSquare.piece = undefined;
+	},
+
+	nextPlayer: function () {
+		// I don't think we need to account for a world with more than two players.
+		if (this.player == players[0]) {
+			return players[1];
+		} else {
+			return players[0];
+		}
 	}
 }
 
@@ -118,9 +132,11 @@ board.initClickEvents = function () {
 				} else {
 					if (typeof currentTurn.selectedSquare !== "undefined") {
 						if (currentTurn.selectedSquare.canMoveTo(rowSquare) == true) {
-							rowSquare.piece = currentTurn.selectedSquare.piece;
-							currentTurn.selectedSquare.piece = undefined;
-							board.draw();
+							currentTurn.movePieceTo(rowSquare);
+							newTurn = Object.create(turn);
+							newTurn.player = currentTurn.nextPlayer();
+							currentTurn = newTurn;
+							currentTurn.draw();
 						}
 					}
 				}
