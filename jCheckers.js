@@ -51,7 +51,9 @@ players[1].color = 'red';
 
 var turn = {
 	draw: function () {
-		return "<div id=\"notice\">" + this.player.color + " player's move.</div>";
+		$('#notice').replaceWith("<div id=\"notice\">" + this.player.color + " player's move.</div>");
+		board.draw();
+		scoreboard.draw();
 	},
 
 	selectSquare: function (newSquare) {
@@ -95,7 +97,8 @@ board.draw = function () {
 		boardElement += "</tr>";
 	});
 	boardElement += "</table>";
-	return boardElement;
+	$('#board').replaceWith(boardElement);
+	this.initClickEvents();
 }
 
 board.initClickEvents = function () {
@@ -111,7 +114,7 @@ board.initClickEvents = function () {
 						if (currentTurn.selectedSquare.canMoveTo(rowSquare) == true) {
 							rowSquare.piece = currentTurn.selectedSquare.piece;
 							currentTurn.selectedSquare.piece = undefined;
-							$('#board').replaceWith(board.draw());
+							board.draw();
 						}
 					}
 				}
@@ -156,7 +159,7 @@ scoreboard.draw = function () {
 	scoreboardElement += "</tr>";
 	scoreboardElement += "</table>";
 
-	return scoreboardElement;
+	$('#scoreboard').replaceWith(scoreboardElement);
 }
 
 currentTurn = Object.create(turn);
