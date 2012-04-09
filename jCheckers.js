@@ -7,6 +7,8 @@ if (typeof Object.create !== 'function') {
 	};
 }
 
+// FUNCTIONS
+
 function reverseColor(thisColor) {
 	if (thisColor == 'light') {
 		return 'dark';
@@ -14,6 +16,8 @@ function reverseColor(thisColor) {
 		return 'light';
 	}
 }
+
+// CLASSES I MEAN UM PROTOTYPES
 
 var player = {
 	piecesCount: function () {
@@ -44,11 +48,6 @@ var square = {
 	}
 };
 
-// Initialize the players.
-var players = [ Object.create(player), Object.create(player) ];
-players[0].color = 'black';
-players[1].color = 'red';
-
 var turn = {
 	draw: function () {
 		$('#notice').replaceWith("<div id=\"notice\">" + this.player.color + " player's move.</div>");
@@ -66,6 +65,13 @@ var turn = {
 		$("#" + newSquare.htmlId()).addClass('selected');
 	}
 }
+
+// DOING THE SHITS
+
+// Initialize the players.
+var players = [ Object.create(player), Object.create(player) ];
+players[0].color = 'black';
+players[1].color = 'red';
 
 // Initialize the board.
 var board = { };
@@ -123,7 +129,7 @@ board.initClickEvents = function () {
 	});
 }
 
-// Initialize the pieces. (I'll clean this up later.)
+// Initialize the pieces.
 var pieces = [];
 _.times(3, function (i) {
 	_.times(board.rows[i].length, function(ii) {
