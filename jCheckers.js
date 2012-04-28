@@ -13,7 +13,7 @@ var player = {
 	piecesCount: function () {
 		// This seems to be some kind of esoteric JS shit. What is 'this' in each context?
 		var thisPlayer = this;
-		return _.filter(pieces, function (piece) {
+		return _.filter(board.pieces(), function (piece) {
 			if (piece.player == thisPlayer) {
 				return piece;
 			}
@@ -99,7 +99,6 @@ var square = {
 	jumpPieceTo: function (otherSquare) {
 		otherSquare.piece = this.piece;
 		this.piece = undefined;
-		pieces.removePiece(this.jumpSquare(otherSquare).piece);
 		this.jumpSquare(otherSquare).piece = undefined;
 	}
 };
@@ -211,29 +210,29 @@ board.initClickEvents = function () {
 	});
 }
 
-// Initialize the pieces.
-var pieces = [];
-pieces.removePiece = function (piece) {
-	var doomed = this.indexOf(piece);
-	if (doomed != -1) {
-		for (i=doomed; i < this.length; i++) {
-			this[i] = this[i + 1];
-		}
-		this.length = this.length - 1;
-	}
+board.pieces = function () {
+	var myPieces = [];
+	_.each(this.rows, function (row) {
+		_.each(row, function (rowSquare) {
+			if (typeof rowSquare.piece !== "undefined") {
+				myPieces.push(rowSquare.piece);
+			}
+		});
+	});
+	return myPieces;
 }
+
+// Initialize the pieces.
 _.times(3, function (i) {
 	_.times(board.rows[i].length, function(ii) {
 		if (board.rows[i][ii].color() == 'dark') {
 			board.rows[i][ii].piece = Object.create({});
 			board.rows[i][ii].piece.player = players[0];
-			pieces.push(board.rows[i][ii].piece);
 		}
 		var redmodifier = 5;
 		if (board.rows[i+redmodifier][ii].color() == 'dark') {
 			board.rows[i+redmodifier][ii].piece = Object.create({});
 			board.rows[i+redmodifier][ii].piece.player = players[1];
-			pieces.push(board.rows[i+redmodifier][ii].piece);
 		}
 	});
 });
