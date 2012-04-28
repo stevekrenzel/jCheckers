@@ -7,16 +7,6 @@ if (typeof Object.create !== 'function') {
 	};
 }
 
-// FUNCTIONS
-
-function reverseColor(thisColor) {
-	if (thisColor == 'light') {
-		return 'dark';
-	} else {
-		return 'light';
-	}
-}
-
 // CLASSES I MEAN UM PROTOTYPES
 
 var player = {
@@ -34,6 +24,19 @@ var player = {
 var square = {
 	htmlId: function () {
 		return "square-" + this.yCoordinate + "-" + this.xCoordinate;
+	},
+
+	color: function () {
+		if ((this.yCoordinate % 2) == 0) {
+			if ((this.xCoordinate % 2) == 0) {
+				return 'dark';
+			}
+		} else {
+			if ((this.xCoordinate % 2) != 0) {
+				return 'dark';
+			}
+		}
+		return 'light';
 	},
 
 	canMoveTo: function (otherSquare) {
@@ -148,15 +151,11 @@ players[1].color = 'red';
 
 // Initialize the board.
 var board = { };
-var thisColor = 'light';
 board.rows = [ ];
 _.times(8, function (i) {
-	thisColor = reverseColor(thisColor);
 	board.rows[i] = [ ];
 	_.times(8, function (ii) {
-		thisColor = reverseColor(thisColor);
 		board.rows[i][ii] = Object.create(square);
-		board.rows[i][ii].color = thisColor;
 		board.rows[i][ii].xCoordinate = ii;
 		board.rows[i][ii].yCoordinate =  i;
 	});
@@ -167,7 +166,7 @@ board.draw = function () {
 	_.each(this.rows, function (row) {
 		boardElement += "<tr>";
 		_.each(row, function (rowSquare) {
-			boardElement += "<td id=\"" + rowSquare.htmlId() + "\" class=\"" + rowSquare.color + "\">";
+			boardElement += "<td id=\"" + rowSquare.htmlId() + "\" class=\"" + rowSquare.color() + "\">";
 			if (typeof rowSquare.piece !== "undefined") {
 				boardElement += "<span class=\"" + rowSquare.piece.player.color + "\">&#x25C9;</span>";
 			}
@@ -225,13 +224,13 @@ pieces.removePiece = function (piece) {
 }
 _.times(3, function (i) {
 	_.times(board.rows[i].length, function(ii) {
-		if (board.rows[i][ii].color == 'dark') {
+		if (board.rows[i][ii].color() == 'dark') {
 			board.rows[i][ii].piece = Object.create({});
 			board.rows[i][ii].piece.player = players[0];
 			pieces.push(board.rows[i][ii].piece);
 		}
 		var redmodifier = 5;
-		if (board.rows[i+redmodifier][ii].color == 'dark') {
+		if (board.rows[i+redmodifier][ii].color() == 'dark') {
 			board.rows[i+redmodifier][ii].piece = Object.create({});
 			board.rows[i+redmodifier][ii].piece.player = players[1];
 			pieces.push(board.rows[i+redmodifier][ii].piece);
