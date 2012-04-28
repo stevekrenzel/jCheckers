@@ -1,9 +1,9 @@
 body {
-	background: #242;
-	color: #ddd;
-	font-family: helvetica, arial, sans-serif;
 	padding-top: 20px;
 	padding-left: 30px;
+	background-color: #242;
+	color: #ddd;
+	font-family: helvetica, arial, sans-serif;
 }
 
 #board {
@@ -37,8 +37,8 @@ body {
 }
 
 #scoreboard {
+	margin-top: 20px;
 	width: 320px;
-	margin-top: 30px;
 	background-color: #222;
 	color: #222;
 }
@@ -48,12 +48,13 @@ body {
 }
 
 #scoreboard td {
-	background-color: #ddd;
 	width: 158px;
+	background-color: #ddd;
 	text-align: center;
 }
 
 #notice {
+	margin-top: 20px;
 	width: 314px;
 	padding: 2px;
 	border: 1px #222 solid;
