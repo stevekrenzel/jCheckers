@@ -1,1 +1,7 @@
-This is just here to please GitHub.
+To build this project run:
+    coffee --compile --bare --output lib checkers.coffee
+from the root of the project.
+
+During development, you probably want to run:
+    coffee --compile --watch --bare --output lib checkers.coffee
+which will watch the file for changes.

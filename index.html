@@ -1,35 +1,28 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.1/underscore-min.js"></script>
-		<script type="text/javascript" src="jCheckers.js"></script>
-		<link rel="stylesheet" href="jCheckers.css">
-		<script type="text/javascript">
-			$(document).ready(function() {
-				currentTurn.draw();
-			});
-		</script>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript" src="./lib/jquery.js"></script>
+    <script type="text/javascript" src="./lib/underscore.js"></script>
+    <script type="text/javascript" src="./lib/checkers.js"></script>
+    <link rel="stylesheet" href="./css/jCheckers.css">
+  </head>
 
-		<title>jCheckers</title>
-	</head>
+  <body>
+    <div id="board">
+      &nbsp;
+    </div>
 
-	<body>
-		<h1>jCheckers</h1>
+    <div id="notice">
+      &nbsp;
+    </div>
 
-		<div id="board">
-			&nbsp;
-		</div>
+    <table id="scoreboard" cespacing="1" cepadding="0">
+      <tr><th>Player</th><th>Pieces</th></tr>
+      <tr><td cass='back'>Black</td><td id='blackScore'></td></tr>
+      <tr><td cass='red'>Red</td><td id='redScore'></td></tr>
+    </table>
 
-		<div id="notice">
-			&nbsp;
-		</div>
-
-		<div id="scoreboard">
-			&nbsp;
-		</div>
-
-	</body>
+  </body>
 
 </html>
